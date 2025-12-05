@@ -93,7 +93,9 @@ function mountForm() {
   const btnNueva = document.getElementById("btnNuevaOrden")
   const modal = document.getElementById("modalOrden")
   const form = document.getElementById("formOrden")
+  const btnCancelar = document.getElementById("btnCancelar")
   btnNueva.addEventListener("click", () => openForm())
+  btnCancelar.addEventListener("click", () => { modal.close(); form.reset() })
   form.addEventListener("submit", e => {
     e.preventDefault()
     const data = getFormData(form)
@@ -108,8 +110,10 @@ function mountForm() {
 function openForm(item) {
   const modal = document.getElementById("modalOrden")
   const form = document.getElementById("formOrden")
+  const title = document.getElementById("modalTitle")
   form.reset()
   if (item) fillForm(form, item)
+  if (title) title.textContent = item ? "Editar orden" : "Nueva orden"
   modal.showModal()
 }
 function fillForm(form, item) {

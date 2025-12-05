@@ -51,42 +51,48 @@
 
   <dialog id="modalOrden">
     <form id="formOrden" method="dialog">
-      <div class="form-grid">
-        <label>
-          Cliente
-          <input name="cliente" required />
-        </label>
-        <label>
-          Vehículo
-          <input name="vehiculo" required />
-        </label>
-        <label>
-          Trabajo
-          <input name="trabajo" required />
-        </label>
-        <label>
-          Estado
-          <select name="estado" required></select>
-        </label>
-        <label>
-          Responsable
-          <input name="responsable" />
-        </label>
-        <label>
-          Ingreso
-          <input name="fechaIngreso" type="date" />
-        </label>
-        <label>
-          Entrega estimada
-          <input name="fechaEntregaEstimada" type="date" />
-        </label>
-        <label class="full">
-          Notas
-          <textarea name="notas" rows="3"></textarea>
-        </label>
+      <div class="modal-header">
+        <h2 id="modalTitle">Nueva orden</h2>
+        <p class="modal-sub">Completa los datos de la orden</p>
+      </div>
+      <div class="modal-body">
+        <div class="form-grid">
+          <label>
+            Cliente
+            <input name="cliente" required />
+          </label>
+          <label>
+            Vehículo
+            <input name="vehiculo" required />
+          </label>
+          <label>
+            Trabajo
+            <input name="trabajo" required />
+          </label>
+          <label>
+            Estado
+            <select name="estado" required></select>
+          </label>
+          <label>
+            Responsable
+            <input name="responsable" />
+          </label>
+          <label>
+            Ingreso
+            <input name="fechaIngreso" type="date" />
+          </label>
+          <label>
+            Entrega estimada
+            <input name="fechaEntregaEstimada" type="date" />
+          </label>
+          <label class="full">
+            Notas
+            <textarea name="notas" rows="3"></textarea>
+          </label>
+        </div>
       </div>
       <div class="modal-actions">
-        <button value="cancel">Cancelar</button>
+        <button id="btnCancelar" type="button">Cancelar</button>
         <button id="btnGuardar" class="primary" value="confirm">Guardar</button>
       </div>
       <input type="hidden" name="id" />
