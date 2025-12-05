@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BodyShoop – Administración de Flujo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>BodyShoop</h1>
+    <div class="header-actions">
+      <button id="btnNuevaOrden" class="primary">Nueva orden</button>
+      <input id="busqueda" type="search" placeholder="Buscar por cliente, vehículo o trabajo" />
+    </div>
+  </header>
+  <nav class="tabs">
+    <button data-tab="lista" class="tab active">Órdenes</button>
+    <button data-tab="tablero" class="tab">Tablero</button>
+    <button data-tab="estadisticas" class="tab">Estadísticas</button>
+  </nav>
+  <main>
+    <section id="vista-lista" class="view">
+      <table class="tabla">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Vehículo</th>
+            <th>Trabajo</th>
+            <th>Estado</th>
+            <th>Responsable</th>
+            <th>Ingreso</th>
+            <th>Entrega estimada</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tbodyLista"></tbody>
+      </table>
+    </section>
+    <section id="vista-tablero" class="view hidden">
+      <div id="kanban" class="kanban"></div>
+    </section>
+    <section id="vista-estadisticas" class="view hidden">
+      <div id="estadisticas" class="stats"></div>
+    </section>
+  </main>
+
+  <dialog id="modalOrden">
+    <form id="formOrden" method="dialog">
+      <div class="form-grid">
+        <label>
+          Cliente
+          <input name="cliente" required />
+        </label>
+        <label>
+          Vehículo
+          <input name="vehiculo" required />
+        </label>
+        <label>
+          Trabajo
+          <input name="trabajo" required />
+        </label>
+        <label>
+          Estado
+          <select name="estado" required></select>
+        </label>
+        <label>
+          Responsable
+          <input name="responsable" />
+        </label>
+        <label>
+          Ingreso
+          <input name="fechaIngreso" type="date" />
+        </label>
+        <label>
+          Entrega estimada
+          <input name="fechaEntregaEstimada" type="date" />
+        </label>
+        <label class="full">
+          Notas
+          <textarea name="notas" rows="3"></textarea>
+        </label>
+      </div>
+      <div class="modal-actions">
+        <button value="cancel">Cancelar</button>
+        <button id="btnGuardar" class="primary" value="confirm">Guardar</button>
+      </div>
+      <input type="hidden" name="id" />
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
