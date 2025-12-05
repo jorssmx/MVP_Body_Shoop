@@ -85,7 +85,8 @@ function mountForm() {
   form.addEventListener("submit", e => {
     e.preventDefault()
     const data = getFormData(form)
-    if (!data.id) createOrden(data)
+    const editing = !!form.elements.id.value
+    if (!editing) createOrden({ ...data, id: uuid() })
     else updateOrden(data)
     modal.close()
     form.reset()
@@ -113,9 +114,8 @@ function fillForm(form, item) {
 function getFormData(form) {
   const fd = new FormData(form)
   const obj = Object.fromEntries(fd.entries())
-  const id = obj.id || uuid()
   return {
-    id,
+    id: obj.id || "",
     cliente: obj.cliente,
     vehiculo: obj.vehiculo,
     trabajo: obj.trabajo,
