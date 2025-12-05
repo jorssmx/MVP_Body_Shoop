@@ -49,14 +49,26 @@ const state = {
   items: [],
   filtro: ""
 }
+const themeKey = "bodyshoop.theme"
 function init() {
   state.items = db.seedIfEmpty()
+  initTheme()
   mountTabs()
   mountForm()
   mountSearch()
   renderLista()
   renderTablero()
   renderEstadisticas()
+}
+function initTheme() {
+  const current = localStorage.getItem(themeKey) || "light"
+  document.documentElement.setAttribute("data-theme", current)
+  const btn = document.getElementById("btnTheme")
+  if (btn) btn.addEventListener("click", () => {
+    const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark"
+    document.documentElement.setAttribute("data-theme", next)
+    localStorage.setItem(themeKey, next)
+  })
 }
 function mountTabs() {
   const tabs = document.querySelectorAll(".tab")
@@ -161,18 +173,18 @@ function renderLista() {
       <td>${i.cliente}</td>
       <td>${i.vehiculo}</td>
       <td>${i.trabajo}</td>
-      <td>${i.estado}</td>
+      <td><span class="badge ${badgeClass(i.estado)}">${i.estado}</span></td>
       <td>${i.responsable || ""}</td>
       <td>${i.fechaIngreso || ""}</td>
       <td>${i.fechaEntregaEstimada || ""}</td>
       <td>
-        <button data-id="${i.id}" class="btn-editar">Editar</button>
-        <button data-id="${i.id}" class="btn-borrar">Borrar</button>
+        <button data-id="${i.id}" class="btn btn-edit small">Editar</button>
+        <button data-id="${i.id}" class="btn btn-borrar small danger">Borrar</button>
       </td>
     `
     tbody.appendChild(tr)
   })
-  tbody.querySelectorAll(".btn-editar").forEach(b => b.addEventListener("click", () => {
+  tbody.querySelectorAll(".btn-edit").forEach(b => b.addEventListener("click", () => {
     const id = b.getAttribute("data-id")
     const item = state.items.find(x => x.id === id)
     openForm(item)
@@ -215,6 +227,10 @@ function renderTablero() {
       })
       right.appendChild(sel)
       card.appendChild(left)
+      const badge = document.createElement("span")
+      badge.className = `badge ${badgeClass(i.estado)}`
+      badge.textContent = i.estado
+      left.appendChild(badge)
       card.appendChild(right)
       cards.appendChild(card)
     })
@@ -222,6 +238,18 @@ function renderTablero() {
     col.appendChild(cards)
     wrap.appendChild(col)
   })
+}
+function badgeClass(estado) {
+  const map = {
+    "Recepción": "badge-recepcion",
+    "Diagnóstico": "badge-diagnostico",
+    "Presupuesto": "badge-presupuesto",
+    "Reparación": "badge-reparacion",
+    "Pintura": "badge-pintura",
+    "Entrega": "badge-entrega",
+    "Cerrado": "badge-cerrado"
+  }
+  return map[estado] || ""
 }
 function renderEstadisticas() {
   const wrap = document.getElementById("estadisticas")
@@ -259,6 +287,7 @@ function filtered() {
   if (!state.filtro) return state.items
   const f = state.filtro
   return state.items.filter(i =>
+    (i.id || "").toLowerCase().includes(f) ||
     (i.cliente || "").toLowerCase().includes(f) ||
     (i.vehiculo || "").toLowerCase().includes(f) ||
     (i.trabajo || "").toLowerCase().includes(f) ||

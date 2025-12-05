@@ -10,41 +10,44 @@
   <header class="app-header">
     <h1>BodyShoop</h1>
     <div class="header-actions">
+      <button id="btnTheme" class="ghost" title="Cambiar tema">🌓</button>
       <button id="btnNuevaOrden" class="primary">Nueva orden</button>
-      <input id="busqueda" type="search" placeholder="Buscar por cliente, vehículo o trabajo" />
+      <input id="busqueda" type="search" placeholder="Buscar por ID, cliente, vehículo o trabajo" />
     </div>
   </header>
-  <nav class="tabs">
-    <button data-tab="lista" class="tab active">Órdenes</button>
-    <button data-tab="tablero" class="tab">Tablero</button>
-    <button data-tab="estadisticas" class="tab">Estadísticas</button>
-  </nav>
-  <main>
-    <section id="vista-lista" class="view">
-      <table class="tabla">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Cliente</th>
-            <th>Vehículo</th>
-            <th>Trabajo</th>
-            <th>Estado</th>
-            <th>Responsable</th>
-            <th>Ingreso</th>
-            <th>Entrega estimada</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="tbodyLista"></tbody>
-      </table>
-    </section>
-    <section id="vista-tablero" class="view hidden">
-      <div id="kanban" class="kanban"></div>
-    </section>
-    <section id="vista-estadisticas" class="view hidden">
-      <div id="estadisticas" class="stats"></div>
-    </section>
-  </main>
+  <div class="container">
+    <nav class="tabs">
+      <button data-tab="lista" class="tab active">Órdenes</button>
+      <button data-tab="tablero" class="tab">Tablero</button>
+      <button data-tab="estadisticas" class="tab">Estadísticas</button>
+    </nav>
+    <main>
+      <section id="vista-lista" class="view">
+        <table class="tabla">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Cliente</th>
+              <th>Vehículo</th>
+              <th>Trabajo</th>
+              <th>Estado</th>
+              <th>Responsable</th>
+              <th>Ingreso</th>
+              <th>Entrega estimada</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tbodyLista"></tbody>
+        </table>
+      </section>
+      <section id="vista-tablero" class="view hidden">
+        <div id="kanban" class="kanban"></div>
+      </section>
+      <section id="vista-estadisticas" class="view hidden">
+        <div id="estadisticas" class="stats"></div>
+      </section>
+    </main>
+  </div>
 
   <dialog id="modalOrden">
     <form id="formOrden" method="dialog">
